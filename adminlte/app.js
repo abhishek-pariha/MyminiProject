@@ -6,6 +6,7 @@ var logger = require('morgan');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var fileUpload = require('express-fileupload');
+var session = require('express-session');
 var {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 var _handlebars = require('handlebars')
 
@@ -33,7 +34,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: 'keyboard cat', cookie: {maxAge : 60000}}));
 app.use(fileUpload());
+
 
 //app.use('/', indexRouter);
 app.use('/user', usersRouter);
@@ -46,7 +49,7 @@ app.use('/country',countryRouter);
 
 //Db Connection
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://Adminltedb:Adminltedb@localhost:27017/Adminltedb")
+mongoose.connect("mongodb://localhost:27017/Adminltedb")
 .then(() => console.log("Connected Successfully"))
 .catch((err) => console.log(err))
 
