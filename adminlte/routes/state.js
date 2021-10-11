@@ -2,28 +2,20 @@ var express = require('express');
 var router = express.Router();
 
 var StateModel = require('../models/state-model');
-var CountryModel = require('../models/country-model');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/add',function(req, res, next){
-    CountryModel.find(function(err, data){
-        if(err){
-            console.log("Error in add"+err);
-        }else{
-            console.log("Successfully addes"+data);
-            res.render('state/add',{mydata : data});
-        }
-    }).lean();
+router.get('/addstate',function(req, res, next){
+    res.render('User/state/addstate');
+    //res.render('User/Accounts/signup');
 })
 
-router.post('/add',function(req, res, next){
+router.post('/addstate',function(req, res, next){
 
     const mybodydata ={
-        state_name : req.body.name,
-        _country : req.body._country
+        state_name : req.body.statename
     }
 
     var data = StateModel(mybodydata);
@@ -32,21 +24,19 @@ router.post('/add',function(req, res, next){
             console.log('Error in saving a data'+err);
         }else{
             console.log("Successfully data saved");
-            res.render('state/add');
+            res.render('User/state/addstate');
         }
     })
 })
 
 router.get('/display',function(req, res, next){
     StateModel.find(function(err, data){
-        StateModel.find({}).lean().populate('_country').exec(function(err,data){
-            if(err){
+        if(err){
                 console.log('Error in display'+err);
             }else{
                 console.log('Successfully Displayed'+data)
-                res.render('state/display',{mydata : data});
+                res.render('User/state/displaystate',{mydata : data});
             }
-        });
     }).lean();
 });
 
@@ -63,27 +53,24 @@ router.get('/delete/:id',function(req, res, next){
     });
 });
 
-router.get('/edit1/:id',function(req, res, next){
+router.get('/editstate/:id',function(req, res, next){
     var editid = req.params.id;
     StateModel.findById(editid,function(err, data){
     
         if(err){
             console.log('Error in data fetching for edit'+err);
         }else{
-            CountryModel.find({},function(err,cdata){
-                res.render('state/edit1',{mydata : data,mycdata : cdata, selectedCountry:data._country});
-            }).lean()
+                res.render('User/state/editstate',{mydata : data});
 
         }
     
     }).lean();
 })
 
-router.post('/edit1/:id',function(req, res, next){
+router.post('/editstate/:id',function(req, res, next){
     var editid = req.params.id;
     const mybodydata = {
-        state_name : req.body.name,
-        _country : req.body._country
+        state_name : req.body.statename
     }
     StateModel.findByIdAndUpdate(editid,mybodydata,function(err){
         if(err){

@@ -14,48 +14,83 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
-<div class="register-box">
+<div class="content-wrapper">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Admin</b>Signup</a>
+    <a href="../../index2.html"><b>User</b>Signup</a>
   </div>
-
+ 
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new member</p>
 
-      <form action="../../index.html" method="post">
+      <form action="signup" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name">
+          <input type="text" class="form-control" name="username" placeholder="Full name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+
+         <div class="input-group mb-3">
+          <input type="number" class="form-control" name="usermobile" placeholder="Mobile number">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="email" class="form-control" name="useremail" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="userpassword" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="date" class="form-control" name="userdob" placeholder="date of birth">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
+
+        <div class="input-group mb-3">
+          <input type="radio" class="form-control" name="gender">Mail
+          <input type="radio" class="form-control" name="gender">Femail
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+         <div class="input-group mb-3">
+          <select class="form-control" name="useradmin">Admin
+            <option>yes</option>
+            <option>No</option>
+          </select>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -65,8 +100,8 @@
               </label>
             </div>
           </div>
-          <!-- /.col -->
-          
+          <!-- /.col --> 
+          <button class="btn btn-primary btn-block" type="submit">Submit</button>
           <!-- /.col -->
         </div>
       </form>

@@ -65,7 +65,7 @@ router.post('/login',function(req, res, next){
       }
       else if(db_email == email && db_password == password){
         req.session.email = db_email;
-        res.redirect('/index');
+        res.redirect('/Home');
       }
       else{
         console.log("Credentials wrong");
@@ -74,7 +74,7 @@ router.post('/login',function(req, res, next){
     }).lean();
 })
   //Home page
-  router.get('/index',function(req, res, next){
+  router.get('/Home',function(req, res, next){
     var myemail = req.session.email;
     console.log(myemail);
   
@@ -84,7 +84,7 @@ router.post('/login',function(req, res, next){
       res.end("Login required to accrss this page");
     }
   
-    res.render('admin-view/Home',{myemail : myemail});
+    res.render('Home',{myemail : myemail});
   });
   router.get('/change-password',function(req, res, next){
       if(!req.session.email){

@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router(); 
 
 //User DB Model
 var UserModel = require('../models/user_details');
@@ -13,24 +13,24 @@ router.get('/index', function(req, res, next) {
 });
 
 //Signup Displaay
-router.get('/Signup1',function(req, res, next){
-  res.render('User/Accounts/login');
+router.get('/signup',function(req, res, next){
+  res.render('User/Accounts/signup');
 }); 
 
 //Signup Processing
 
-router.post('/Signup',function(req, res, next){
+router.post('/signup',function(req, res, next){
   console.log(req.body);
 
   const mybodydata = {
 
-    user_name: req.body.name,
-    user_mobile: req.body.mobile,
-    user_email: req.body.email,
-    user_password: req.body.password,
-    user_dob: req.body.dob,    
-    user_gender: req.body.gender,
-    user_gender: req.body.user_isadmin
+    user_name: req.body.username,
+    user_mobile: req.body.usermobile,
+    user_email: req.body.useremail,
+    user_password: req.body.userpassword,
+    user_dob: req.body.userdob,    
+    user_gender: req.body.usergender,
+    user_gender: req.body.useradmin
   }
 
   var data = UserModel(mybodydata);
@@ -39,7 +39,7 @@ router.post('/Signup',function(req, res, next){
       console.log("Error in Singup Form"+err);
     }else{
       console.log("Successfully Signup");
-      res.redirect('Admin/Accounts/Signup');
+      res.redirect('/user/Signup');
     }
   })
 
@@ -54,8 +54,8 @@ router.get('/Login',function(req, res, next){
 //Login Fetch Data
 router.post('/Login',function(req, res, next){
    
-  var email = req.body.email;
-  var password = req.body.password;
+  var email = req.body.useremail;
+  var password = req.body.userpassword;
   console.log(req.body);
   UserModel.findOne({'user_email' : email}, function(err, db_users){
 
@@ -76,7 +76,7 @@ router.post('/Login',function(req, res, next){
     }
     else if(db_email == email && db_password == password){
       req.session.email = db_email;
-      res.render('User-View/Home');
+      res.render('Home');
     }
     else{
       console.log("Credentials wrong");
@@ -103,7 +103,7 @@ router.get('/change-password',function(req, res, next){
     console.log("Email Session is set")
     res.redirect('/Login');
     }
-    res.render('User-View/change-password');
+    res.render('User/Accounts/change-password');
 })
 //Change Password
 router.post('/change-password',function(req, res, next){
@@ -161,7 +161,7 @@ router.get('/forgott',function(req, res, next){
 })
 
 
-router.post('/Forgot-Password',function(req, res, next){
+router.post('/forgot',function(req, res, next){
   var email = req.body.email;
   console.log(req.body);
   UserModel.findOne({"user_email": email}, function(err, db_users){
