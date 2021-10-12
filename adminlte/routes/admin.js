@@ -3,12 +3,10 @@ var router = express.Router();
 
 var AdminModel = require('../models/admin-details');
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('index'); 
-});
 
-router.get('/index', function(req, res, next) {
-  res.render('index'); 
+
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
 });
 //Signup Get
 router.get('/signup',function(req, res, next){
@@ -29,7 +27,7 @@ router.post('/signup',function(req, res, next){
       console.log('Err in signup'+err);
     }else{
       console.log("Signup Successfulluy"+data);
-      res.redirect('/signup');
+      res.redirect('/admin/signup');
     }
   })
 })
@@ -65,7 +63,7 @@ router.post('/login',function(req, res, next){
       }
       else if(db_email == email && db_password == password){
         req.session.email = db_email;
-        res.redirect('/Home');
+        res.redirect('/admin/Home');
       }
       else{
         console.log("Credentials wrong");
@@ -84,8 +82,16 @@ router.post('/login',function(req, res, next){
       res.end("Login required to accrss this page");
     }
   
-    res.render('Home',{myemail : myemail});
+    res.render('Admin/Accounts/Home',{myemail : myemail});
   });
+
+  //logout page
+  
+  router.get('/Logout',function(req, res, next){
+      
+    //res.redirect('/admin/login');
+    req.session.destroy();
+}) 
   router.get('/change-password',function(req, res, next){
       if(!req.session.email){
       console.log("Email Session is set")
@@ -136,12 +142,7 @@ router.post('/login',function(req, res, next){
       });
   });
   
-  //logout page
   
-  router.get('/Logout',function(req, res, next){
-      req.session.destroy();
-      res.redirect('/');
-  }) 
   
   //Forgot Password
   
@@ -156,8 +157,8 @@ router.post('/login',function(req, res, next){
       console.log("find one"+db_users);
   
       if(db_users){
-        var db_email = db_users.user_email;
-        var db_password = db_users.user_password;
+        var db_email = db_users.admin_email;
+        var db_password = db_users.admin_password;
       }
       console.log("db_user.user_email"+db_email);
       console.log("db_user.user_password"+db_password);
@@ -193,7 +194,8 @@ router.post('/login',function(req, res, next){
           let info = await transporter.sendMail(mailoption)
           console.log("Message sent : ",info.messageId);
           console.log("Preview url: ", nodemailer.getTestMessageUrl(info));
-          res.end("Mail send to your mail id");
+          //res.end("Mail send to your mail id");
+          res.redirect('/admin/login');
         }
         main().catch(console.error);
       }

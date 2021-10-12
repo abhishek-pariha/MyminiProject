@@ -1,3 +1,4 @@
+{{>main}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,6 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 <body>
-  {{>main}}
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -36,7 +36,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -50,26 +50,27 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped">
                   <tr>
-                    <th>No</th>
-                    <th>Category Name</th>
-                    <th>Action</th>
-                  </tr>
-                  
-                      {{#each user_array}}
-                        <tr>
-                          <td>{{@index}}</td>
-                          <td>{{category_name}}</td>
-                          <td>
-                            <a href="/admin/Category/edit1/{{_id}}">Edit</a> | 
-                            <a href="/admin/Category/delete/{{_id}}">Delete</a>
-                          </td>
+                            <th>Index</th>
+                            <th>Area Name</th>
+                            <th>City Name</th>
+                            <th>State Name</th>
+                            <th>Action</th>
                         </tr>
-                    {{/each}}
-                  
-                 
-                  
+                        {{#each mydata}}
+                        <tr>
+                            <td>{{@index}}</td>
+                            <td>{{ area_name }}</td>
+                            <td>{{_city.city_name}}</td>
+                            <td>{{_state.state_name}}</td>
+                            <td>
+                                <a href="/Admin/area/edit/{{_id}}">Edit</a>
+                                <a href="/Admin/area/delete/{{_id}}">Delete</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                   
                 </table>
               </div>
               <!-- /.card-body -->
@@ -81,10 +82,9 @@
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
-      
     </section>
-  </div>
-{{>footer}}
+  
+
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -126,5 +126,4 @@
   });
 </script>
 </body>
-
 </html>

@@ -64,14 +64,14 @@ router.get('/display', function(req, res, next) {
 // });
 
 router.get('/delete/:id', function(req, res) {
-    CategoryModel.findOneAndDelete(req.params.id, function(err, project) {
+    CategoryModel.findByIdAndDelete(req.params.id, function(err, project) {
       if (err) {
 
         console.log("Error in Record Delete " + err);
       } else {
 
         console.log(" Record Deleted ");
-          res.redirect('/Admin/Category/display-category');
+          res.redirect('/Admin/Category/display');
       }
   });
 }); 
@@ -105,7 +105,7 @@ router.post('/edit1/:id', function(req, res) {
           
       } else {
         console.log("Edit Succesfully")
-          res.redirect('/Category/display-category');
+          res.redirect('/Admin/Category/display');
       }
   });
 });

@@ -2,36 +2,36 @@ var express = require('express');
 var router = express.Router();
 
 var ProductModel = require('../models/product-details');
-var CategoryModel = require('../models/category-details');
+var SubcategoryModel = require('../models/subcategory-model');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/Insert',function(req, res, next){
-    CategoryModel.find(function(err,data){
+router.get('/add',function(req, res, next){
+    SubcategoryModel.find(function(err,data){
         if(err){
             console.log('Error in fetch data'+err);
         }else{
             console.log(data)
-            res.render('product/Insert',{mydata : data});
+            res.render('Admin/product/add',{mydata : data});
         }
     }).lean();
 })
 
-router.post('/Insert',function(req, res, next){
+router.post('/add',function(req, res, next){
    
-    var fileobject = req.files.file123;
-    var filename = req.files.file123.name;
+    var fileobject = req.files.productphoto;
+    var filename = req.files.productphoto.name;
     
     const mybodydata = {
         
-        product_name : req.body.name,
-        product_detail : req.body.detail,
-        product_price : req.body.price,
+        product_name : req.body.productname,
+        product_detail : req.body.productdetails,
+        product_price : req.body.productprice,
         product_photo : filename,
-        _category : req.body._category,
+        _subcategory : req.body._subcategory,
     }
 
     var data = ProductModel(mybodydata);
@@ -42,7 +42,7 @@ router.post('/Insert',function(req, res, next){
             console.log("INsert Successfully");
             fileobject.mv('public/upload/'+filename,function(err){
                 if(err) throw err;
-                res.redirect('Insert');    
+                res.redirect('/Admin/product/add');    
             });
             
         }
@@ -55,10 +55,10 @@ router.get('/display',function(req, res, next){
         console.log(data);
         
         ProductModel.find({})
-        .populate('_category')
+        .populate('_subcategory')
         .exec(function(err, data){
                 console.log("Successfully display"+data);
-                res.render('product/display',{mydata : data});
+                res.render('Admin/product/display',{mydata : data});
         })
     }).lean();
 })
@@ -71,44 +71,49 @@ router.get('/delete/:id',function(req, res, next){
             console.log("Error is data"+err);
         }else{
             console.log("Succesfully Data Deleted"+data);
-            res.redirect('/product/display');
+            res.redirect('/Admin/product/display');
         }
     })
-});
+}); 
 
 //Edit
 router.get('/edit/:id',function(req, res, next){
     var editid = req.params.id;
-    ProductModel.findById(editid,function(err, data){
+    ProductModel.findById(editid,function(err, pdata){
         if(err){
             console.log("Error in data"+err)
         }else{
-            console.log("Sucessfully Data Edited"+data);
-            res.render('product/edit',{mydata:data});
+            SubcategoryModel.find({},function(err,sdata){
+            console.log("Sucessfully Data Edited"+sdata);
+            res.render('Admin/product/edit',{mypdata:pdata,mysdata:sdata});
+        
+            }).lean();
         }
     }).lean();
 });
 
 router.post('/edit/:id',function(req, res, next){
     var editid = req.params.id;
-    var fileobject = req.files.file123;
-    var filename = req.files.file123.name;
+    var fileobject = req.files.productphoto;
+    var filename = req.files.productphoto.name;
     
     const mybodydata = {
-        product_name : req.body.name,
-        product_detail : req.body.detail,
-        product_price : req.body.price,
+        
+        product_name : req.body.productname,
+        product_detail : req.body.productdetails,
+        product_price : req.body.productprice,
         product_photo : filename,
-        _category : req.body._category,
+        _subcategory : req.body._subcategory,
     }
+
 
     ProductModel.findByIdAndUpdate(editid,mybodydata,function(err, data){
         if(err){
             console.log("Error in thi"+err);
-            res.redirect('/product/display');
+  
         }else{
             console.log("Edit Sucessfully"+data);
-            res.redirect("/product/display",{mydata : data});
+            res.redirect("/Admin/product/display",{mydata : data});
         }
     });
 });

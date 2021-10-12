@@ -6,10 +6,10 @@ var mySchema = new Schema({
     product_detail: String,
     product_price : String,
     product_photo : String,
-    _category:
+    _subcategory:
         {
           type: mongoose.Schema.Types.ObjectId, 
-          ref: 'category'
+          ref: 'subcategory'
         }
 })
 

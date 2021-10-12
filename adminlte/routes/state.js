@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/addstate',function(req, res, next){
-    res.render('User/state/addstate');
+    console.log("Hello Here")
+    res.render('Admin/state/addstate');
     //res.render('User/Accounts/signup');
 })
 
@@ -24,7 +25,7 @@ router.post('/addstate',function(req, res, next){
             console.log('Error in saving a data'+err);
         }else{
             console.log("Successfully data saved");
-            res.render('User/state/addstate');
+            res.render('Admin/state/addstate');
         }
     })
 })
@@ -35,7 +36,7 @@ router.get('/display',function(req, res, next){
                 console.log('Error in display'+err);
             }else{
                 console.log('Successfully Displayed'+data)
-                res.render('User/state/displaystate',{mydata : data});
+                res.render('Admin/state/displaystate',{mydata : data});
             }
     }).lean();
 });
@@ -48,7 +49,7 @@ router.get('/delete/:id',function(req, res, next){
             console.log('error in delete'+err);
         }else{
             console.log('Successfully deleted'+data);
-            res.redirect('/state/display');
+            res.redirect('/admin/state/display');
         }
     });
 });
@@ -60,7 +61,7 @@ router.get('/editstate/:id',function(req, res, next){
         if(err){
             console.log('Error in data fetching for edit'+err);
         }else{
-                res.render('User/state/editstate',{mydata : data});
+                res.render('Admin/state/editstate',{mydata : data});
 
         }
     
@@ -77,7 +78,7 @@ router.post('/editstate/:id',function(req, res, next){
             console.log("Error in update whene we want to edit"+err);
         }else{
             console.log("Successfully Edit");
-            res.redirect('/state/display');
+            res.redirect('/admin/state/display');
         }
     })
 })

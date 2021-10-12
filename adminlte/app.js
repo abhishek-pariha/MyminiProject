@@ -10,14 +10,16 @@ var session = require('express-session');
 var {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 var _handlebars = require('handlebars')
 
-//var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var productRouter = require('./routes/product');
 var categoryRouter = require('./routes/category');
 var cityRouter = require('./routes/city');
 var stateRouter = require('./routes/state');
-var countryRouter = require('./routes/country');
+var areaRouter = require('./routes/area');
 var adminRouter = require('./routes/admin');
+var subcategoryRouter = require('./routes/subcategory');
+
 var app = express();
 
 // view engine setup
@@ -38,18 +40,19 @@ app.use(session({secret: 'keyboard cat', cookie: {maxAge : 60000}}));
 app.use(fileUpload());
 
 
-//app.use('/', indexRouter);
-app.use('/user', usersRouter);
-app.use('/',adminRouter);
-app.use('/product',productRouter);
-app.use('/category',categoryRouter);
-app.use('/city',cityRouter);
-app.use('/state',stateRouter);
-app.use('/country',countryRouter);
+app.use('/', indexRouter);
+app.use('/admin/user', usersRouter);
+app.use('/admin',adminRouter);
+app.use('/admin/product',productRouter);
+app.use('/admin/category',categoryRouter);
+app.use('/admin/city',cityRouter);
+app.use('/admin/state',stateRouter);
+app.use('/admin/area',areaRouter);
+app.use('/admin/subcategory',subcategoryRouter);
 
 //Db Connection
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/Adminltedb")
+mongoose.connect("mongodb://Adminltedb:Adminltedb@localhost:27017/Adminltedb")
 .then(() => console.log("Connected Successfully"))
 .catch((err) => console.log(err))
 

@@ -1,0 +1,54 @@
+{{>main}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<body class="hold-transition login-page">
+
+<div class="content-wrapper">
+
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+        <form method="POST">
+            <div>
+                <label>Add SubCategory</label>
+                <input type="text" value="{{mysdata.subcategory_name}}" name="subcategoryname">
+            </div>
+            <div>
+                <label>Add Category</label>
+                <select name="_category">
+                {{#each mycdata}}
+                    <option value="{{_id}}">{{category_name}}</option>
+                {{/each}}
+                </select>
+            </div> 
+            <div>
+                <button class="btn btn-primary btn-block" type="submit">Submit</button>
+               
+            </div>
+        </form>
+
+            
+                
+            
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

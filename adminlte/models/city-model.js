@@ -7,10 +7,5 @@ var mySchema = new Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref : 'state'
     },
-    _country : 
-            {
-                type : mongoose.Schema.Types.ObjectId,
-                ref : 'country'
-            }
 })
 module.exports = mongoose.model('city',mySchema);
