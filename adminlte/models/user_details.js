@@ -10,7 +10,7 @@ var mySchema = new Schema({
     user_photo : String,
     _area :{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'area'
+        ref : 'area' 
     },
     user_joinDate : {type: Date, default: Date.now}
 

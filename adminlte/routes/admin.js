@@ -87,10 +87,11 @@ router.post('/login',function(req, res, next){
 
   //logout page
   
-  router.get('/Logout',function(req, res, next){
+  router.get('/logout',function(req, res, next){
       
-    //res.redirect('/admin/login');
+    res.redirect('/admin/login');
     req.session.destroy();
+    
 }) 
   router.get('/change-password',function(req, res, next){
       if(!req.session.email){

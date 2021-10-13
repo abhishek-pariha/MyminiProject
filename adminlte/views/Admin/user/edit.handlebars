@@ -1,0 +1,99 @@
+{{>main}}
+<html>
+    <head>
+        <style>
+            body {
+   font-family: Arial, Helvetica, sans-serif;
+}
+* {
+   box-sizing: border-box;
+}
+form {
+    margin-left: auto;
+    margin-right: auto;
+   display: flex;
+   flex-flow: row wrap;
+   align-items: center;
+}
+form label {
+   margin: 5px 10px 5px 0;
+}
+form input {
+   margin: 5px 10px 5px 0;
+   padding: 10px;
+}
+form button {
+   padding: 10px 20px;
+   font-size: 20px;
+   background-color: rgb(39, 22, 141);
+   border: 1px solid #ddd;
+   color: white;
+   cursor: pointer;
+   font-weight: bolder;
+   border-radius: 4px;
+}
+form button:hover {
+   background-color: rgb(113, 65, 225);
+}
+@media (max-width: 800px) {
+   form input {
+      margin: 10px 0;
+   }
+   form.center {
+       margin-left: auto;
+       margin-right: auto;
+      flex-direction: column;
+      align-items: stretch;
+   }
+   
+}
+    table.center{
+       margin-left: auto;
+       margin-right: auto;
+   }
+        </style>
+    </head>
+    <body>
+        <form class="center" method="POST" enctype="multipart/form-data">
+           <table class="center" >
+               <tr>
+                   <td><label>User Name</label></td>
+                   <td><input type="text" value="{{myudata.user_name}}" name="username"></td>
+               </tr>
+               <tr>
+                   <td><label>Email</label></td>
+                   <td> <input type="email"value="{{myudata.user_email}}"  name="useremail"></td>
+               </tr>
+               <tr>
+                   <td><label>Password</label></td>
+                   <td><input type="password"value="{{myudata.user_password}}"  name="userpassword"></td>
+               </tr>
+               <tr>
+                   <td> <label>Address</label></td>
+                   <td><textarea style="width: 230px;" cols="5" rows="5" name="useraddress" value="{{myudata.user_address}}"></textarea></td>
+               </tr>
+               <tr>
+                   <td><label>Gender</label></td>
+                   <td><input type="radio" value="{{myudata.user_gender}}"  name="usergender">Mail
+                   &nbsp;<input type="radio" value="{{myudata.user_gender}}"  name="usergender">Femail</td>
+               </tr>
+               <tr>
+                   <td><label>Image</label></td>
+                   <td> <input type="file" value="{{myudata.user_photo}}"name="userimage"></td>
+               </tr>
+               <tr>
+                   <td><label>Subcategory</label></td>
+                   <td><select  name="_area">
+                    {{#each mydata}}
+                    <option value="{{myadata._id}}">{{area_name}}</option>
+                    {{/each}}
+                </select></td>
+               </tr>
+               <tr>
+                   <td></td>
+                   <td><button type="submit">Submit</button></td>
+               </tr>
+           </table>
+        </form>
+    </body>
+</html>
