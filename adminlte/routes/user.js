@@ -88,4 +88,28 @@ router.get('/edit/:id',function(req, res, next){
   })
 }) 
   
+router.post('/edit/:id',function(req, res, next){
+  var fileobject = req.files.userimage;
+  var filename = req.files.userimage.name;
+  console.log(req.body);
+  const mybodydata = {
+    user_name : req.body.username,
+    user_email :req.body.useremail,
+    user_password : req.body.userpassword,
+    user_address :req.body.useraddress,
+    user_gender : req.body.usergender,
+    user_photo : filename,
+    _area :req.body._area
+  }
+
+
+  UserModel.findByIdAndUpdate(req.params.id,mybodydata,function(err,data){
+    if(err){
+      console.log('Error in update'+err);
+    }else{
+      console.log("Successfully updated"+data);
+      res.redirect("/admin/user/display");
+    }
+  })
+})
 module.exports = router;

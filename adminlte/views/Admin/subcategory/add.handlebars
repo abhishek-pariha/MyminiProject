@@ -6,7 +6,7 @@
 <body class="hold-transition login-page">
 
 <div class="content-wrapper">
-
+ 
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
@@ -16,14 +16,15 @@
 
             <div>
                 <label>Subcategory Name</label>
-                <input class="form-control" type="text" name="subcategoryname">&nbsp;
-                <label>Subcategory Name</label>
+                <input class="form-control" type="text" name="subcategoryname">&nbsp;<br/>
+                <label>Subcategory Name</label><br>
+
                 <select name="_category">
                   {{#each mydata}}
                   <option value="{{_id}}">{{category_name}}</option>
                   {{/each}}
-                </select>
-                <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                </select>&nbsp
+                <button class="btn btn-primary btn-block" type="submit">Submit</button><br/>
             </div>
 
     </div>

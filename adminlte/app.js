@@ -9,6 +9,9 @@ var fileUpload = require('express-fileupload');
 var session = require('express-session');
 var {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 var _handlebars = require('handlebars')
+var helpers = require('handlebars-helpers')({
+  handlebars : _handlebars
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
@@ -27,7 +30,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.engine('handlebars',exphbs({
   defaultLayout : false,
-  handlebars: allowInsecurePrototypeAccess(_handlebars)
+  handlebars: allowInsecurePrototypeAccess(_handlebars),
+  "helpers" : helpers
 }));
 app.set('view engine', 'handlebars');
 

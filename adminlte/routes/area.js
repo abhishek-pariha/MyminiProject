@@ -84,12 +84,20 @@ router.get('/delete/:id',function(req, res, next){
 
 router.get('/edit/:id',function(req, res, next){
     var editid = req.params.id;
-    AreaModel.findById(editid,function(err, data){
+    AreaModel.findById(editid,function(err, areadata){
         if(err){
             console.log("Error in edit"+err);
         }else{
-            console.log("Successfull data fetch"+data);
-            res.render('country/edit',{mydata : data});
+            CityModel.find({},function(err,citydata){
+                StateModel.find({},function(err, statedata){
+                    if(err){
+                        console.log("Error in state fetch"+err);
+                    }else{
+                        console.log("Successfull data fetch"+statedata);
+                        res.render('Admin/area/edit',{myareadata : areadata,mycitydata : citydata, mystatedata :statedata });
+                    }
+                }).lean();
+            }).lean();
         }
     }).lean();
 })

@@ -82,7 +82,7 @@ router.get('/edit/:id',function(req, res, next){
     }).lean();
 })
 
-router.post('/edit1/:id',function(req, res, next){
+router.post('/edit/:id',function(req, res, next){
     var editid = req.params.id;
     console.log(req.body)
     const mybodydata = {
@@ -90,11 +90,11 @@ router.post('/edit1/:id',function(req, res, next){
         _category : req.body._category
     }
     console.log(mybodydata);
-    SubcategoryModel.findByIdAndUpdate(editid,mybodydata,function(err){
+    SubcategoryModel.findByIdAndUpdate(editid,mybodydata,function(err,data){
         if(err){
             console.log("Error in update whene we want to edit"+err);
         }else{
-            console.log("Successfully Edit");
+            console.log("Successfully Edit"+data);
             res.redirect('/Admin/subcategory/display');
         }
     })

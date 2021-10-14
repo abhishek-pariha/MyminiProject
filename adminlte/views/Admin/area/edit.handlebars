@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+/<head>
 <body class="hold-transition login-page">
 
 <div class="content-wrapper">
@@ -14,7 +14,21 @@
        <form  method="POST" >
             <div>
                 <label>State Name</label>
-                <input type="text" value="{{mydata.state_name}}" name="statename">
+                <input type="text" value="{{myareadata.state_name}}" name="statename">
+               
+               <label>City Name</label>
+                <select name="_city">
+                  {{#each mycitydata}}
+                  <option value="{{_id}}">{{city_name}}</option>
+                  {{/each}}
+                </select>
+                
+                <label>State Name</label>
+                <select name="_state">
+                  {{#each mystatedata}}
+                  <option value="{{_id}}">{{state_name}}</option>
+                  {{/each}}
+                </select>
                 <input type="submit" value="Submit">
             </div>
         </form>

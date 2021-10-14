@@ -1,4 +1,4 @@
-{{>main}}
+{{>main}}<br>
 <html>
     <head>
 
@@ -6,7 +6,7 @@
     <body>
         <form method="post" action="add" enctype="multipart/form-data" class="content-wrapper">
                 <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10 mx-auto">
                 <div class="card card-primary">
                     <div class="card-header">
                     <h3 class="card-title">Product Information</h3>
@@ -31,11 +31,7 @@
                         <label for="inputClientCompany">Product Price</label>
                         <input type="number"class="form-control" name="productprice">
                     </div>
-                    <div class="form-group">
-                        <label for="inputProjectLeader">Project Image</label>
-                        <input type="file" class="form-control" name="productphoto">
-                    </div>
-                    <div class="form-group">
+                        <div class="form-group">
                         <label for="inputProjectLeader">SubCategory Name</label>
                         <select name="_subcategory" class="form-control">
                             {{#each mydata}}
@@ -43,6 +39,12 @@
                             {{/each}}
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="inputProjectLeader">Project Image</label><br/>
+                        <input type="file"  name="productphoto">
+                    </div>
+                
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block" >Submit</button>
                     </div>

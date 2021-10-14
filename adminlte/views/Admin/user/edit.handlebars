@@ -59,14 +59,14 @@ form button:hover {
                <tr>
                    <td><label>User Name</label></td>
                    <td><input type="text" value="{{myudata.user_name}}" name="username"></td>
-               </tr>
+               </tr> 
                <tr>
                    <td><label>Email</label></td>
                    <td> <input type="email"value="{{myudata.user_email}}"  name="useremail"></td>
                </tr>
                <tr>
                    <td><label>Password</label></td>
-                   <td><input type="password"value="{{myudata.user_password}}"  name="userpassword"></td>
+                   <td><input type="text"value="{{myudata.user_password}}"  name="userpassword"></td>
                </tr>
                <tr>
                    <td> <label>Address</label></td>
@@ -74,20 +74,22 @@ form button:hover {
                </tr>
                <tr>
                    <td><label>Gender</label></td>
-                   <td><input type="radio" value="{{myudata.user_gender}}"  name="usergender">Mail
-                   &nbsp;<input type="radio" value="{{myudata.user_gender}}"  name="usergender">Femail</td>
+                   <td><input type="radio" value="male"  {{#compare myudata.user_gender "==" "male"}}checked{{else}}{{/compare}} name="usergender">Male
+                   &nbsp;<input type="radio" value="female" {{#compare myudata.user_gender "==" "female"}}checked{{/compare}}  name="usergender">Female</td>
                </tr>
                <tr>
                    <td><label>Image</label></td>
                    <td> <input type="file" value="{{myudata.user_photo}}"name="userimage"></td>
                </tr>
                <tr>
-                   <td><label>Subcategory</label></td>
-                   <td><select  name="_area">
-                    {{#each mydata}}
-                    <option value="{{myadata._id}}">{{area_name}}</option>
-                    {{/each}}
-                </select></td>
+                   <td>
+                    <label>Subcategory</label>
+                    <select name="_area">
+                        {{#each myadata}}
+                        <option value="{{_id}}">{{area_name}}</option>
+                        {{/each}}
+                    </select
+                ></td> 
                </tr>
                <tr>
                    <td></td>
