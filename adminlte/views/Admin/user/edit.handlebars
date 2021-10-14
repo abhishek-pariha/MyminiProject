@@ -83,10 +83,10 @@ form button:hover {
                </tr>
                <tr>
                    <td>
-                    <label>Subcategory</label>
+                    <label>Area</label>
                     <select name="_area">
                         {{#each myadata}}
-                        <option value="{{_id}}">{{area_name}}</option>
+                        <option  value="{{_id}}" {{#compare (toString ../selectedUser) '==' (toString _id)}}selected{{/compare}}>{{area_name}}</option>
                         {{/each}}
                     </select
                 ></td> 

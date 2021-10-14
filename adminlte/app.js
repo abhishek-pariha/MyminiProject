@@ -9,6 +9,11 @@ var fileUpload = require('express-fileupload');
 var session = require('express-session');
 var {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 var _handlebars = require('handlebars')
+
+_handlebars.registerHelper("toString", function(data) {
+  return data.toString();
+});
+
 var helpers = require('handlebars-helpers')({
   handlebars : _handlebars
 });

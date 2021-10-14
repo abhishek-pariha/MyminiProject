@@ -81,11 +81,11 @@ router.get('/edit/:id',function(req, res, next){
           console.log("Error in fetching data"+err);
         }else{
           console.log("Data fetch Successfully"+adata);
-          res.render('Admin/user/edit',{myudata : udata,myadata : adata});
+          res.render('Admin/user/edit',{myudata : udata,myadata : adata,selectedUser:udata._area});
         }
-      })
+      }).lean();
     }
-  })
+  }).lean();
 }) 
   
 router.post('/edit/:id',function(req, res, next){
